@@ -31,4 +31,15 @@ public class ProductionRepository {
                 .filter(i -> i.getId().equals(productionId))
                 .findFirst();
     }
+
+    public void deleteById(Long id) {
+        productions.removeIf(i -> i.getId().equals(id));
+    }
+
+    public Optional<Production> saveProduction(String productionName, String country, String address) {
+        Production production = new Production(productionName, country, address);
+        productions.removeIf(m -> m.getName().equals(production.getName()));
+        productions.add(production);
+        return Optional.of(production);
+    }
 }

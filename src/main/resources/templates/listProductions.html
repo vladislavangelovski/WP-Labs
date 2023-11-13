@@ -26,33 +26,26 @@
 
 <div class="container mb-4">
     <div class="row">
-        <div class="col-12" th:if="${movies.size() > 0}">
+        <div class="col-12" th:if="${productions.size() > 0}">
 
-            <form th:method="POST" th:action="@{/ticketOrder}">
+            <form th:method="POST" th:action="@{/productions}">
                 <div class="table-responsive ">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">Movie Title</th>
-                            <th scope="col">Movie Summary</th>
-                            <th scope="col">Movie Rating</th>
-                            <th scope="col">Movie Production</th>
+                            <th scope="col">Production Name</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Address</th>
                         </tr>
                         </thead>
                         <tbody >
-                        <tr th:each="movie : ${movies}" class="movie">
-                            <td>
-                                <label>
-                                    <input type="radio" name="movieTitle" th:value="${movie.getTitle()}"
-                                           th:text=" ${movie.getTitle()}" >
-                                </label>
-                            </td>
-                            <td th:text="${movie.getSummary()}"></td>
-                            <td th:text="${movie.getRating()}"></td>
-                            <td th:text="${movie.getProduction() !=null}? ${movie.getProduction().getName()}:'No Production'"></td>
+                        <tr th:each="production : ${productions}" class="production">
+                            <td th:name="production" th:text="${production.getName()}"></td>
+                            <td th:text="${production.getCountry()}"></td>
+                            <td th:text="${production.getAddress()}"></td>
                             <td class="text-right">
                                 <th:block>
-                                    <form th:action="@{'/movies/delete/{id}' (id=${movie.getId()})}"
+                                    <form th:action="@{'/productions/delete/{id}' (id=${production.getId()})}"
                                           th:method="DELETE">
                                         <button type="submit"
                                                 class="btn btn-sm btn-danger delete-product">
@@ -60,37 +53,31 @@
                                         </button>
                                     </form>
                                 </th:block>
-                                    <th:block>
-                                        <a th:href="@{'/movies/edit-form/{id}' (id=${movie.getId()})}"
-                                           class="btn btn-sm btn-info edit-product">
-                                            <i class="fa fa-trash">Edit</i>
-                                        </a>
-                                    </th:block>
-
+                                <th:block>
+                                    <a th:href="@{'/productions/edit-formP/{id}' (id=${production.getId()})}"
+                                       class="btn btn-sm btn-info edit-product">
+                                        <i class="fa fa-trash">Edit</i>
+                                    </a>
+                                </th:block>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <h2>Choose number of tickets:</h2>
-                <label>
-                    <input type="number" name="numTickets" min="1" max="10">
-                </label><br/>
-                <br/>
-                <input type="submit" value="Order">
             </form>
             <div>
-                <a th:href="@{/movies/add-form}" class="btn btn-sm btn-success">
-                    <i class="fa fa-plus">Add new movie</i>
+                <a th:href="@{/productions/add-formP}" class="btn btn-sm btn-success">
+                    <i class="fa fa-plus">Add new production</i>
                 </a>
             </div>
             <div>
-                <a th:href="@{/productions}" class="btn btn-sm btn-info">
-                    <i class="fa fa-plus">See Productions</i>
+                <a th:href="@{/movies}" class="btn btn-sm btn-info">
+                    <i class="fa fa-plus">See Movies</i>
                 </a>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
