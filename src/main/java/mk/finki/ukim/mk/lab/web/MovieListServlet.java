@@ -15,7 +15,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "")
+@WebServlet(urlPatterns = "/servlet/movies")
 public class MovieListServlet extends HttpServlet {
     private final SpringTemplateEngine springTemplateEngine;
     private final MovieService movieService;
