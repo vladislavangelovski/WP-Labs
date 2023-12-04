@@ -4,29 +4,30 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
-public class TicketOrder {
+public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String movieTitle;
-    private Long numberOfTickets;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private User user;
     @DateTimeFormat(pattern = "yyyy-MM-dd' 'HH:mm:ss")
     private LocalDateTime dateCreated;
+    @OneToMany
+    private List<TicketOrder> ticketOrders;
 
-    public TicketOrder(String movieTitle, Long numberOfTickets, User user, LocalDateTime dateCreated) {
-        this.movieTitle = movieTitle;
-        this.numberOfTickets = numberOfTickets;
+    public ShoppingCart(User user) {
         this.user = user;
-        this.dateCreated = dateCreated;
+        this.dateCreated = LocalDateTime.now();
+        this.ticketOrders = new ArrayList<>();
     }
 
-    public TicketOrder() {
+    public ShoppingCart() {
     }
 }

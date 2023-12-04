@@ -2,8 +2,11 @@ package mk.finki.ukim.mk.lab.web.controller;
 
 import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.Production;
+import mk.finki.ukim.mk.lab.model.User;
+import mk.finki.ukim.mk.lab.service.AuthService;
 import mk.finki.ukim.mk.lab.service.MovieService;
 import mk.finki.ukim.mk.lab.service.ProductionService;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +18,17 @@ import java.util.List;
 public class MovieController {
     private final MovieService movieService;
     private final ProductionService productionService;
+    private final AuthService authService;
 
-    public MovieController(MovieService movieService, ProductionService productionService) {
+    public MovieController(MovieService movieService, ProductionService productionService, AuthService authService) {
         this.movieService = movieService;
         this.productionService = productionService;
+        this.authService = authService;
     }
 
     @GetMapping
     public String getMoviesPage(@RequestParam(required = false) String error, Model model) {
+        //movieService.transferDataToDatabase();
         List<Movie> movies = movieService.listAll();
         model.addAttribute("movies", movies);
         return "listMovies";

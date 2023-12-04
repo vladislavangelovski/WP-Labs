@@ -9,5 +9,6 @@ public interface ProductionService {
     public List<Production> findAll();
     Optional<Production> findById(Long id);
     void deleteById(Long id);
-    Optional<Production> saveProduction(String productionName, String country, String address);
+    Production saveProduction(String productionName, String country, String address);
+    void transferDataToDatabase();
 }

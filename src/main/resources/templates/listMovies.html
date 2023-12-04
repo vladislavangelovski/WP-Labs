@@ -14,8 +14,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
@@ -50,6 +48,7 @@
                             <td th:text="${movie.getSummary()}"></td>
                             <td th:text="${movie.getRating()}"></td>
                             <td th:text="${movie.getProduction() !=null}? ${movie.getProduction().getName()}:'No Production'"></td>
+                            <input type="hidden" name="movieId" th:value="${movie.getId()}"/>
                             <td class="text-right">
                                 <th:block>
                                     <form th:action="@{'/movies/delete/{id}' (id=${movie.getId()})}"
@@ -75,7 +74,12 @@
                 <h2>Choose number of tickets:</h2>
                 <label>
                     <input type="number" name="numTickets" min="1" max="10">
-                </label><br/>
+                </label>
+                <br/>
+                <h2>Choose a date of order:</h2>
+                <label>
+                    <input type="datetime-local" name="localDateTime"/>
+                </label>
                 <br/>
                 <input type="submit" value="Order">
             </form>
@@ -87,6 +91,11 @@
             <div>
                 <a th:href="@{/productions}" class="btn btn-sm btn-info">
                     <i class="fa fa-plus">See Productions</i>
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/shopping-cart}" class="btn btn-sm btn-info">
+                    <i class="fa fa-plus">Go to your shopping cart!</i>
                 </a>
             </div>
         </div>

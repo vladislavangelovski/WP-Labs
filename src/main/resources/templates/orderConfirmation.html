@@ -22,6 +22,9 @@
   <header>
     <h1>Movie Order page - Order confirmation </h1>
   </header>
+  <form th:action="@{'/shopping-cart/add-product/' + ${orderId}}"
+        th:method="POST">
+    <input type="hidden" th:name="localDateTime" th:value="${localDateTime}" />
   <table>
     <tr>
       <th colspan="2">
@@ -30,21 +33,23 @@
     </tr>
     <tr>
       <td><b>Client Name </b></td>
-      <td >Petko Petkov</td>
+      <td th:text="${fullName.name}  ${fullName.surname}"></td>
     </tr>
     <tr>
-      <td><b>Client IP Address</b></td>
-      <td>127.0.0.1</td>
+      <td><b>Date of order</b></td>
+      <td th:text="${localDateTime}"></td>
     </tr>
     <tr>
       <td><b>Ticket for Movie</b></td>
-      <td th:text="${movieTitle}">Oppenheimer</td>
+      <td th:text="${movieTitle}"></td>
     </tr>
     <tr>
       <td><b>Number of tickets</b></td>
-      <td th:text="${numTickets}">2</td>
+      <td th:text="${numTickets}"></td>
     </tr>
   </table>
+    <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-shopping-cart">Go to your shopping cart!</i></button>
+  </form>
 </section>
 </body>
 </html>

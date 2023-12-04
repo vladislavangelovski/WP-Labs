@@ -1,8 +1,6 @@
 package mk.finki.ukim.mk.lab.web.controller;
 
-import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.Production;
-import mk.finki.ukim.mk.lab.repository.ProductionRepository;
 import mk.finki.ukim.mk.lab.service.ProductionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +19,7 @@ public class ProductionController {
 
     @GetMapping
     public String getProductionsPage( Model model) {
+        //productionService.transferDataToDatabase();
         List<Production> productions = productionService.findAll();
         model.addAttribute("productions", productions);
         return "listProductions";
