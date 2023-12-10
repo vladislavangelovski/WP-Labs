@@ -28,7 +28,7 @@ public class MovieController {
 
     @GetMapping
     public String getMoviesPage(@RequestParam(required = false) String error, Model model) {
-        //movieService.transferDataToDatabase();
+        movieService.transferDataToDatabase();
         List<Movie> movies = movieService.listAll();
         model.addAttribute("movies", movies);
         return "listMovies";
